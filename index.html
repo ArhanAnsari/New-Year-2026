@@ -118,20 +118,29 @@
     function toggleMusic(){bgMusic.paused?bgMusic.play():bgMusic.pause()}
 
     /* Global Counter (CountAPI) */
-    const counterEl=counter;
-    const COUNTER_KEY = "new-year-2026-codewitharhan";
-    fetch(`https://api.countapi.xyz/get/${COUNTER_KEY}`).then(r=>r.json()).then(d=>counterEl.innerText=d.value||0);
+  const counterEl = document.getElementById("counter");
 
-    /* Fireworks */
-    const fw=fireworks.getContext('2d');
-    fireworks.width=innerWidth;fireworks.height=innerHeight;
-    function firework(){
-      for(let i=0;i<140;i++){
-        fw.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
-        fw.beginPath();fw.arc(Math.random()*fireworks.width,Math.random()*fireworks.height,2,0,Math.PI*2);fw.fill();
-      }
-      setTimeout(()=>fw.clearRect(0,0,fireworks.width,fireworks.height),550);
-    }
+  const NAMESPACE = "codewitharhan";
+  const KEY = "new-year-2026";
+
+  // Load current count
+  fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      counterEl.innerText = data.value || 0;
+    })
+    .catch(() => {
+      counterEl.innerText = "0";
+    });
+
+  // Increment counter
+  function incrementCounter() {
+    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        counterEl.innerText = data.value;
+      });
+  }
 
     /* Confetti */
     const cf=confetti.getContext('2d');
@@ -158,7 +167,7 @@
 
       firework();confettiBurst();popSound.play();bgMusic.play();
 
-      fetch(`https://api.countapi.xyz/hit/${COUNTER_KEY}`).then(r=>r.json()).then(d=>counterEl.innerText=d.value);
+      incrementCounter();
     }
 
     /* Auto from link */
