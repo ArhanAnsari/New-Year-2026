@@ -7,56 +7,249 @@
 
   <meta name="description" content="Premium Canva-style New Year wishing website by CodeWithArhan with countdown, fireworks, confetti, music, QR sharing and global analytics." />
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-    body{background:radial-gradient(circle at top,#1a1a3d,#050515);color:#fff;overflow-x:hidden}
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1a1a3d, #050515);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
     /* Loader */
-    #loader{position:fixed;inset:0;background:linear-gradient(145deg,#050515,#0c0c2a);display:flex;align-items:center;justify-content:center;z-index:9999}
-    .loader-text{font-size:2.2rem;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#00eaff,#8a2be2,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:pulse 1.4s infinite}
-    @keyframes pulse{0%,100%{opacity:.35;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(145deg, #050515, #0c0c2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
-    /* Hero */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;position:relative}
-    h1{font-size:clamp(2.8rem,6vw,4.8rem);font-weight:800;background:linear-gradient(90deg,#00eaff,#8a2be2,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s infinite alternate}
-    @keyframes glow{from{text-shadow:0 0 12px rgba(0,234,255,.4)}to{text-shadow:0 0 30px rgba(255,0,255,.9)}}
-    .year{font-size:clamp(3.2rem,8vw,6.2rem);font-weight:800;margin:14px 0;letter-spacing:6px}
+    .loader-text {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #00eaff, #8a2be2, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 1.4s infinite;
+    }
 
-    /* Countdown */
-    .countdown{display:flex;gap:16px;margin:22px 0;flex-wrap:wrap;justify-content:center}
-    .time-box{background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.04));padding:16px 20px;border-radius:18px;min-width:90px;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .time-box span{display:block;font-size:2rem;font-weight:700}
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #00eaff, #8a2be2, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 12px rgba(0, 234, 255, 0.4); }
+      to { text-shadow: 0 0 30px rgba(255, 0, 255, 0.9); }
+    }
+
+    .year {
+      font-size: clamp(3.2rem, 8vw, 6.2rem);
+      font-weight: 800;
+      margin: 14px 0;
+      letter-spacing: 6px;
+    }
+
+    /* Countdown Timer */
+    .countdown {
+      display: flex;
+      gap: 16px;
+      margin: 22px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .time-box {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+      padding: 16px 20px;
+      border-radius: 18px;
+      min-width: 90px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+    }
 
     /* Inputs & Buttons */
-    input{padding:14px 20px;border-radius:30px;border:none;outline:none;margin-top:18px;width:270px;text-align:center;font-size:1rem}
-    .btn{margin-top:18px;padding:15px 38px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(135deg,#00eaff,#8a2be2);color:#fff;font-weight:600;font-size:1.05rem;transition:.35s}
-    .btn:hover{transform:translateY(-3px) scale(1.08);box-shadow:0 18px 45px rgba(138,43,226,.7)}
+    input {
+      padding: 14px 20px;
+      border-radius: 30px;
+      border: none;
+      outline: none;
+      margin-top: 18px;
+      width: 270px;
+      text-align: center;
+      font-size: 1rem;
+    }
 
-    .wish{margin-top:18px;font-size:1.35rem}
-    .share{margin-top:10px;font-size:.9rem;opacity:.9;max-width:320px;word-break:break-all}
+    .btn {
+      margin-top: 18px;
+      padding: 15px 38px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #00eaff, #8a2be2);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: 0.35s;
+    }
 
-    /* QR */
-    .qr{margin-top:14px}
-    .qr img{width:140px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .btn:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 18px 45px rgba(138, 43, 226, 0.7);
+    }
 
-    /* Music */
-    .music-btn{position:fixed;top:18px;right:18px;background:rgba(255,255,255,.18);border:none;color:#fff;padding:12px 18px;border-radius:30px;cursor:pointer;backdrop-filter:blur(8px)}
+    .wish {
+      margin-top: 18px;
+      font-size: 1.35rem;
+    }
+
+    .share {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      max-width: 320px;
+      word-break: break-all;
+    }
+
+    /* QR Code */
+    .qr {
+      margin-top: 14px;
+    }
+
+    .qr img {
+      width: 140px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Music Button */
+    .music-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      border: none;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
+      box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+    }
+
+    .music-btn.playing {
+      background: linear-gradient(135deg, #00eaff, #8a2be2);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+    }
 
     /* Canvases */
-    canvas{position:fixed;inset:0;pointer-events:none}
+    canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
 
     /* Analytics */
-    .analytics{position:fixed;bottom:18px;right:18px;background:rgba(255,255,255,.18);padding:12px 16px;border-radius:18px;font-size:.9rem;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .analytics {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
 
-    footer{text-align:center;padding:22px;font-size:.85rem;opacity:.85}
+    .analytics:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.8rem; }
+      .year { font-size: 4rem; letter-spacing: 2px; }
+      .countdown { gap: 10px; margin: 15px 0; }
+      .time-box { min-width: 70px; padding: 12px; border-radius: 14px; }
+      .time-box span { font-size: 1.5rem; }
+      input { width: 90%; max-width: 300px; }
+      .music-btn { top: 10px; right: 10px; padding: 8px 14px; font-size: 0.9rem; }
+      .analytics { bottom: 10px; right: 10px; padding: 8px 12px; font-size: 0.8rem; }
+    }
+
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
   <!-- Loader -->
-  <div id="loader"><div class="loader-text">CodeWithArhan</div></div>
+  <div id="loader">
+    <div class="loader-text">CodeWithArhan</div>
+  </div>
 
   <!-- Music & Sound -->
   <audio id="bgMusic" loop>
@@ -65,26 +258,26 @@
   <audio id="popSound">
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-confetti-pop-2073.mp3" type="audio/mpeg">
   </audio>
-  <button class="music-btn" onclick="toggleMusic()">Music</button>
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♪ Music</button>
 
   <!-- Canvases -->
   <canvas id="fireworks"></canvas>
   <canvas id="confetti"></canvas>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Happy New Year</h1>
-    <div class="year" id="year"></div>
+    <h1 class="fade-in">Happy New Year</h1>
+    <div class="year fade-in delay-1" id="year"></div>
 
-    <div class="countdown">
+    <div class="countdown fade-in delay-2">
       <div class="time-box"><span id="days">0</span>Days</div>
       <div class="time-box"><span id="hours">0</span>Hours</div>
       <div class="time-box"><span id="minutes">0</span>Min</div>
       <div class="time-box"><span id="seconds">0</span>Sec</div>
     </div>
 
-    <input id="nameInput" placeholder="Enter your name" />
-    <button class="btn" onclick="celebrate()">Celebrate</button>
+    <input id="nameInput" class="fade-in delay-3" placeholder="Enter your name" />
+    <button class="btn fade-in delay-3" onclick="celebrate()">Celebrate</button>
 
     <div class="wish" id="wish"></div>
     <div class="share" id="share"></div>
@@ -96,85 +289,186 @@
   <footer>© <span id="footerYear"></span> CodeWithArhan</footer>
 
   <script>
-    /* Loader */
-    window.onload=()=>setTimeout(()=>loader.style.display='none',1500)
+    /* =========================================
+       Loader
+       ========================================= */
+    window.onload = () => setTimeout(() => loader.style.display = 'none', 1500);
 
-    /* Dates */
-    const now=new Date();
-    const newYear=new Date(now.getFullYear()+1,0,1);
-    year.innerText=newYear.getFullYear();
-    footerYear.innerText=now.getFullYear();
+    /* =========================================
+       Dates & Countdown
+       ========================================= */
+    const now = new Date();
+    const newYear = new Date(now.getFullYear() + 1, 0, 1);
+    year.innerText = newYear.getFullYear();
+    footerYear.innerText = now.getFullYear();
 
-    /* Countdown */
-    setInterval(()=>{
-      const d=newYear-new Date();
-      days.innerText=Math.floor(d/(1000*60*60*24));
-      hours.innerText=Math.floor(d/(1000*60*60))%24;
-      minutes.innerText=Math.floor(d/(1000*60))%60;
-      seconds.innerText=Math.floor(d/1000)%60;
-    },1000);
+    setInterval(() => {
+      const d = newYear - new Date();
+      days.innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+      hours.innerText = Math.floor(d / (1000 * 60 * 60)) % 24;
+      minutes.innerText = Math.floor(d / (1000 * 60)) % 60;
+      seconds.innerText = Math.floor(d / 1000) % 60;
+    }, 1000);
 
-    /* Music */
-    function toggleMusic(){bgMusic.paused?bgMusic.play():bgMusic.pause()}
+    /* =========================================
+       Music Control
+       ========================================= */
+    const musicBtn = document.getElementById("musicBtn");
 
-    /* Global Counter (CountAPI) */
-  const counterEl = document.getElementById("counter");
-
-  const NAMESPACE = "codewitharhan";
-  const KEY = "new-year-2026";
-
-  // Load current count
-  fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      counterEl.innerText = data.value || 0;
-    })
-    .catch(() => {
-      counterEl.innerText = "0";
-    });
-
-  // Increment counter
-  function incrementCounter() {
-    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        counterEl.innerText = data.value;
-      });
-  }
-
-    /* Confetti */
-    const cf=confetti.getContext('2d');
-    confetti.width=innerWidth;confetti.height=innerHeight;
-    function confettiBurst(){
-      const p=[...Array(160)].map(()=>({x:Math.random()*confetti.width,y:-20,r:Math.random()*6+2,v:Math.random()*3+2,c:`hsl(${Math.random()*360},100%,60%)`}));
-      let t=setInterval(()=>{
-        cf.clearRect(0,0,confetti.width,confetti.height);
-        p.forEach(o=>{o.y+=o.v;cf.fillStyle=o.c;cf.beginPath();cf.arc(o.x,o.y,o.r,0,Math.PI*2);cf.fill()});
-      },16);
-      setTimeout(()=>{clearInterval(t);cf.clearRect(0,0,confetti.width,confetti.height)},1300);
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.classList.add('playing');
+        musicBtn.innerText = '♪ Playing';
+      } else {
+        bgMusic.pause();
+        musicBtn.classList.remove('playing');
+        musicBtn.innerText = '♪ Music';
+      }
     }
 
-    /* Celebrate */
-    function celebrate(){
-      const name=(nameInput.value||'Developer').trim();
-      wish.innerText=`Happy New Year, ${name}! Keep Coding & Winning.`;
+    /* =========================================
+       Global Counter (CountAPI)
+       ========================================= */
+    const counterEl = document.getElementById("counter");
+    const NAMESPACE = "new-year-2026-arhan-" + new Date().getFullYear();
+    const KEY = "celebrations";
 
-      const url=new URL(location.href);
-      url.searchParams.set('name',name);
-      share.innerText=url.toString();
+    // Helper to update UI
+    const updateCounter = (val) => {
+      counterEl.innerText = val;
+      localStorage.setItem('local_celebrations', val);
+    };
 
-      qr.innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url.toString())}" />`;
+    // Initial Load
+    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => updateCounter(data.value || 0))
+      .catch(() => {
+        // Fallback to local storage or 0 if API fails
+        updateCounter(localStorage.getItem('local_celebrations') || 0);
+      });
 
-      firework();confettiBurst();popSound.play();bgMusic.play();
+    // Increment counter
+    function incrementCounter() {
+      fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+        .then(res => res.json())
+        .then(data => updateCounter(data.value))
+        .catch(() => {
+          // Fallback increment local
+          let current = parseInt(localStorage.getItem('local_celebrations') || "0");
+          updateCounter(current + 1);
+        });
+    }
+
+    /* =========================================
+       Fireworks Animation
+       ========================================= */
+    const fw = fireworks.getContext('2d');
+    fireworks.width = innerWidth;
+    fireworks.height = innerHeight;
+
+    function firework() {
+      const particles = [...Array(80)].map(() => ({
+        x: Math.random() * fireworks.width,
+        y: fireworks.height / 2 + Math.random() * 100,
+        vx: (Math.random() - 0.5) * 12,
+        vy: (Math.random() - 0.5) * 12 - 2,
+        life: 1,
+        c: `hsl(${Math.random() * 60 + 200}, 100%, 60%)`
+      }));
+      
+      let fwInterval = setInterval(() => {
+        fw.clearRect(0, 0, fireworks.width, fireworks.height);
+        let active = false;
+        particles.forEach(p => {
+          if (p.life > 0) {
+            active = true;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.15;
+            p.life -= 0.015;
+            fw.fillStyle = `${p.c.slice(0, -1)},${p.life})`;
+            fw.fillRect(p.x, p.y, 3, 3);
+          }
+        });
+        if (!active) {
+          clearInterval(fwInterval);
+          fw.clearRect(0, 0, fireworks.width, fireworks.height);
+        }
+      }, 16);
+    }
+
+    /* =========================================
+       Confetti Animation
+       ========================================= */
+    const cf = confetti.getContext('2d');
+    confetti.width = innerWidth;
+    confetti.height = innerHeight;
+
+    function confettiBurst() {
+      const p = [...Array(200)].map(() => ({
+        x: Math.random() * confetti.width,
+        y: -20,
+        r: Math.random() * 6 + 2,
+        v: Math.random() * 3 + 2,
+        c: `hsl(${Math.random() * 360}, 100%, 60%)`,
+        spin: Math.random() * 0.2 - 0.1
+      }));
+
+      let t = setInterval(() => {
+        cf.clearRect(0, 0, confetti.width, confetti.height);
+        p.forEach(o => {
+          o.y += o.v;
+          cf.fillStyle = o.c;
+          cf.beginPath();
+          cf.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+          cf.fill();
+        });
+      }, 16);
+      
+      setTimeout(() => {
+        clearInterval(t);
+        cf.clearRect(0, 0, confetti.width, confetti.height);
+      }, 1800);
+    }
+
+    /* =========================================
+       Celebrate Function
+       ========================================= */
+    function celebrate() {
+      const name = (nameInput.value || 'Developer').trim();
+      wish.innerText = `Happy New Year, ${name}! Keep Coding & Winning.`;
+
+      const url = new URL(location.href);
+      url.searchParams.set('name', name);
+      share.innerText = url.toString();
+
+      qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url.toString())}" />`;
+
+      firework();
+      confettiBurst();
+      popSound.play();
+      bgMusic.play();
+      musicBtn.classList.add('playing');
+      musicBtn.innerText = '♪ Playing';
 
       incrementCounter();
     }
 
-    /* Auto from link */
-    const qp=new URLSearchParams(location.search).get('name');
-    if(qp){nameInput.value=qp;setTimeout(celebrate,900)}
+    /* =========================================
+       Auto-Run from Link & Resize
+       ========================================= */
+    const qp = new URLSearchParams(location.search).get('name');
+    if (qp) {
+      nameInput.value = qp;
+      setTimeout(celebrate, 900);
+    }
 
-    onresize=()=>{fireworks.width=confetti.width=innerWidth;fireworks.height=confetti.height=innerHeight}
+    onresize = () => {
+      fireworks.width = confetti.width = innerWidth;
+      fireworks.height = confetti.height = innerHeight;
+    };
   </script>
 
 </body>
